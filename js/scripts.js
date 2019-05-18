@@ -1,23 +1,19 @@
 var repository = [
-  ['Bulbasaur',
-    0.7,
-    ['grass', 'poison'],
-  ]
-  ['Wigglyfuff',
-    1,
-    ['fairy', 'normal'],
-  ]
-  ['Butterfree',
-    1.1,
-    ['bug', 'flying'],
-  ]
+  { name: 'Bulbasaur',
+    height: 0.7,
+    type: ['grass', 'poison'], },
+
+  { name: 'Wigglyfuff',
+    height: 1,
+    type: ['fairy', 'normal'], },
+
+  { name: 'Butterfree',
+    height: 1.1,
+    type: ['bug', 'flying'], },
 ]
 
 for (var i = 0; i < repository.length; i++) {
-  document.write ('Bulbasaur' Height: 0.7);
-  document.write ('Wigglyfuff' Height: 1);
-  document.write ('Butterfree' Height: 1.1);
-  if (length > 1.1) {
-    document.write ('Wow, that’s big!')
+  document.write ('<p>' + repository[i].name + '</p>');
+  if (repository[i].height >  1.1) {
+    document.write ('<p>' + 'Wow, that’s big!' + '</p>')
   }
-}

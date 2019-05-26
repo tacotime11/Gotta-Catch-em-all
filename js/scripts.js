@@ -14,5 +14,7 @@ var repository = [
 
 document.write('<h3>Pokemon</h3>');
 repository.forEach(function(currentItem){
-  document.write('<p>' + currentItem + '</p>');
+  document.write('<h2>' + currentItem.name + '</h2>');
+  document.write('<p>' + currentItem.height + '</p>');
+  document.write('<p>' + currentItem.type + '</p>');
 });

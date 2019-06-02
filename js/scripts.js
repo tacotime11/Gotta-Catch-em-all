@@ -28,7 +28,7 @@ var pokemonRepository = (function () {
 })();
 
 repository.forEach(function(currentItem){
-  document.write('<h2>' + currentItem.name + '</h2>');
-  document.write('<p>' + currentItem.height + '</p>');
-  document.write('<p>' + currentItem.type + '</p>');
-});
+  console.log(pokemonRepository.getAll());
+  pokemonRepository.add();
+  console.log(pokemonRepository.getAll());
+}

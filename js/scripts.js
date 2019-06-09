@@ -13,7 +13,7 @@ var pokemonRepository = (function () {
       type: ['bug', 'flying'], },
   ];
 
-  function add(pokemonRepository) {
+  function add(pokemon) {
     repository.push(pokemon);
   }
 
@@ -27,8 +27,8 @@ var pokemonRepository = (function () {
   };
 })();
 
-repository.forEach(function(currentItem){
+pokemonRepository.getAll().forEach(function(currentItem){
   console.log(pokemonRepository.getAll());
   pokemonRepository.add();
   console.log(pokemonRepository.getAll());
-}
+})

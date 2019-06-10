@@ -37,3 +37,4 @@ for (var i = 0; i < pokemonRepository.length; i++) {
   document.write ('<h2>' + pokemonRepository[i].name + '</h2>');
   document.write ('<p>' + pokemonRepository[i].height + '</p>');
   document.write ('<p>' + pokemonRepository[i].name + '</p>');
+}

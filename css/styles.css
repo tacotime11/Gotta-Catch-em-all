@@ -1,0 +1,9 @@
+.container{
+  border: 1px green solid;
+  height: 100px;
+  margin-bottom: 7px;
+}
+
+.selected{
+  border: 3px blue solid;
+}

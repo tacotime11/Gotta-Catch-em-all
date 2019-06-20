@@ -35,23 +35,19 @@ pokemonRepository.getAll().forEach(function(currentItem){
 
 var $pokemon-list = document.querySelector('.pokemon-list');
 pokemonRepository.getAll().forEach(function(currentItem){
-  var listItem = document.createElement('li')
+  var listItem = document.createElement('li');
   var button = document.createElement('button');
   button.innerText = "Bulbasaur";
-  var listItem = document.createElement('li')
-  var button = document.createElement('button');
   button.innerText = "Wiggilyfuff";
-  var listItem = document.createElement('li')
-  var button = document.createElement('button');
   button.innerText = "Butterfree";
 function addListItem(pokemon) {
   repository.push(pokemon);
 }
 function showDetails(pokemon) {
-  console.log(pokemon)
+  console.log(pokemon);
 }
-.addEventListener('click', function (pokemon)
-})
+.addEventListener('click', function (pokemon);
+)}
 
 $element.classList.add('my-class');
 

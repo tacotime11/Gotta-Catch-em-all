@@ -33,24 +33,21 @@ pokemonRepository.getAll().forEach(function(currentItem){
   console.log(pokemonRepository.getAll());
 })
 
-var $pokemon-list = document.querySelector('.pokemon-list');
-pokemonRepository.getAll().forEach(function(currentItem){
-  var listItem = document.createElement('li');
-  var button = document.createElement('button');
-  button.innerText = "Bulbasaur";
-  button.innerText = "Wiggilyfuff";
-  button.innerText = "Butterfree";
-function addListItem(pokemon) {
-  repository.push(pokemon);
-}
-function showDetails(pokemon) {
-  console.log(pokemon);
-}
-.addEventListener('click', function (pokemon);
-)}
+function addListItem(pokemonItem) {
+   var listItemText = document.createTextNode(pokemonItem.name);
+   var buttonText = document.createTextNode('show details');
+   var $detailsButton = document.createElement('button');
+   var $li = document.createElement('li');
 
-$element.classList.add('my-class');
+   $detailsButton.classList.add('details-button');
+   $li.classList.add('list-item');
 
-$listItem.appendChild(button);
+   $detailsButton.appendChild(buttonText);
+   $p.appendChild(listItemText);
+   $li.appendChild($p);
+   $li.appendChild($detailsButton);
 
-$listItem.appendChild(listItem);
+   $detailsButton.addEventListener('click', function(event) {
+   showDetails(pokemonItem);
+   });
+ }

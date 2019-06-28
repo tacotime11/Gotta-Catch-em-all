@@ -21,33 +21,36 @@ var pokemonRepository = (function () {
     return repository;
   }
 
+  function addListItem(pokemonItem) {
+    var listItemText = document.createTextNode(pokemonItem.name);
+    var buttonText = document.createTextNode('show details');
+    var $detailsButton = document.createElement('button');
+    var $li = document.createElement('li');
+    var $p = document.createElement('p');
+    var $ul = document.querySelector('.pokemon-list');
+
+    $detailsButton.classList.add('details-button');
+    $li.classList.add('list-item');
+
+    $detailsButton.appendChild(buttonText);
+    $p.appendChild(listItemText);
+    $li.appendChild($p);
+    $li.appendChild($detailsButton);
+
+    $ul.appendChild($li)
+
+    $detailsButton.addEventListener('click', function(event) {
+      showDetails(pokemonItem);
+    });
+  }
+
   return {
     add: add,
+    addListItem: addListItem,
     getAll: getAll
   };
 })();
 
 pokemonRepository.getAll().forEach(function(currentItem){
-  console.log(pokemonRepository.getAll());
-  pokemonRepository.add();
-  console.log(pokemonRepository.getAll());
+  pokemonRepository.addListItem(currentItem);
 })
-
-function addListItem(pokemonItem) {
-   var listItemText = document.createTextNode(pokemonItem.name);
-   var buttonText = document.createTextNode('show details');
-   var $detailsButton = document.createElement('button');
-   var $li = document.createElement('li');
-
-   $detailsButton.classList.add('details-button');
-   $li.classList.add('list-item');
-
-   $detailsButton.appendChild(buttonText);
-   $p.appendChild(listItemText);
-   $li.appendChild($p);
-   $li.appendChild($detailsButton);
-
-   $detailsButton.addEventListener('click', function(event) {
-   showDetails(pokemonItem);
-   });
- }

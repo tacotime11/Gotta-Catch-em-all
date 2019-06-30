@@ -21,6 +21,10 @@ var pokemonRepository = (function () {
     return repository;
   }
 
+function showDetails(pokemon) {
+  var name = pokemon.name;
+}
+
   function addListItem(pokemonItem) {
     var listItemText = document.createTextNode(pokemonItem.name);
     var buttonText = document.createTextNode('show details');
@@ -36,8 +40,7 @@ var pokemonRepository = (function () {
     $p.appendChild(listItemText);
     $li.appendChild($p);
     $li.appendChild($detailsButton);
-
-    $ul.appendChild($li)
+    $ul.appendChild($li);
 
     $detailsButton.addEventListener('click', function(event) {
       showDetails(pokemonItem);
@@ -53,4 +56,4 @@ var pokemonRepository = (function () {
 
 pokemonRepository.getAll().forEach(function(currentItem){
   pokemonRepository.addListItem(currentItem);
-})
+});

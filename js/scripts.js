@@ -1,17 +1,5 @@
 var pokemonRepository = (function () {
-  var repository = [
-    { name: 'Bulbasaur',
-      height: 0.7,
-      type: ['grass', 'poison'], },
-
-    { name: 'Wigglyfuff',
-      height: 1,
-      type: ['fairy', 'normal'], },
-
-    { name: 'Butterfree',
-      height: 1.1,
-      type: ['bug', 'flying'], },
-  ];
+  var repository = [];
   var apiUrl = 'https://pokeapi.co/api/v2/pokemon/?limit=150';
   function add(pokemon) {
     repository.push(pokemon);
@@ -23,6 +11,10 @@ var pokemonRepository = (function () {
 
   function showDetails(pokemon) {
     var name = pokemon.name;
+    pokemonRepository.loadDetails(pokemon)
+      .then(function(details){
+        showModal(details)
+      })
   }
 
   function loadList() {
@@ -72,33 +64,16 @@ var pokemonRepository = (function () {
       item.imageUrl = details.sprites.front_default;
       item.height = details.height;
       item.types = Object.keys(details.types);
+      return item;
     }).catch(function (e) {
       console.error(e);
     });
   }
 
-  return {
-    add: add,
-    getAll: getAll,
-    showDetails: showDetails,
-    loadList: loadList,
-    addListItem: addListItem,
-    loadDetails: loadDetails,
-  };
-})();
-
-pokemonRepository.loadList().then( () =>{
-  pokemonRepository.getAll().forEach(function(pokemon){
-    pokemonRepository.addListItem(pokemon);
-  });
-});
-
-
-(function() {
   var $modalContainer = document.querySelector('#modal-container');
   var dialogPromiseReject;
 
-  function showModal(title, text) {
+  function showModal(details) {
 
     $modalContainer.innerHTML = '';
 
@@ -112,14 +87,18 @@ pokemonRepository.loadList().then( () =>{
     closeButtonElement.addEventListener('click', hideModal);
 
     var titleElement = document.createElement('h1');
-    titleElement.innerText = title;
+    titleElement.innerText = details.name
 
     var contentElement = document.createElement('p');
-    contentElement.innerText = text;
+    contentElement.innerText = details.height;
+
+    var imageElement = document.createElement('img');
+    imageElement.src = details.imageUrl;
 
     modal.appendChild(closeButtonElement);
     modal.appendChild(titleElement);
     modal.appendChild(contentElement);
+    modal.appendChild(imageElement);
     $modalContainer.appendChild(modal);
 
     $modalContainer.classList.add('is-visible');
@@ -134,61 +113,19 @@ pokemonRepository.loadList().then( () =>{
     }
   }
 
-  function showDialog(title, text) {
-    showModal(title, text);
+  return {
+    add: add,
+    getAll: getAll,
+    showDetails: showDetails,
+    loadList: loadList,
+    addListItem: addListItem,
+    loadDetails: loadDetails,
+  };
 
-
-    var modal = $modalContainer.querySelector('.modal');
-
-    var confirmButton = document.createElement('button');
-    confirmButton.classList.add('modal-confirm');
-    confirmButton.innerText = 'Confirm';
-
-    var cancelButton = document.createElement('button');
-    cancelButton.classList.add('modal-cancel');
-    cancelButton.innerText = 'Cancel';
-
-    modal.appendChild(confirmButton);
-    modal.appendChild(cancelButton);
-
-
-    confirmButton.focus();
-
-    return new Promise((resolve, reject) => {
-      cancelButton.addEventListener('click', hideModal);
-      confirmButton.addEventListener('click', () => {
-        dialogPromiseReject = null;
-        hideModal();
-        resolve();
-      });
-
-      dialogPromiseReject = reject;
-    });
-  }
-
-
-  document.querySelector('#show-modal').addEventListener('click', () => {
-    showModal('Charmander', '1.2 meters');
-  });
-
-  document.querySelector('#show-dialog').addEventListener('click', () => {
-    showDialog('Confirm action', 'Are you sure you want to do this?').then(function() {
-      alert('confirmed!');
-    }, () => {
-      alert('not confirmed');
-    });
-  });
-
-  window.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && $modalContainer.classList.contains('is-visible')) {
-      hideModal();
-    }
-  });
-
-  $modalContainer.addEventListener('click', (e) => {
-    var target = e.target;
-    if (target === $modalContainer) {
-      hideModal();
-    }
-  });
 })();
+
+pokemonRepository.loadList().then( () =>{
+  pokemonRepository.getAll().forEach(function(pokemon){
+    pokemonRepository.addListItem(pokemon);
+  });
+});
